@@ -30,13 +30,15 @@ dependencies:
   flutter:
     sdk: flutter
 
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  riverpod: ^1.0.3
-  flutter_bloc: ^8.0.1
+  flutter_riverpod: ^1.0.3
+  #flutter_bloc: ^8.0.1
   get: ^4.6.1
+  flick_video_player: ^0.3.1
+  video_player: ^2.2.18
+
 
 dev_dependencies:
   flutter_test:
@@ -54,6 +56,16 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+
+  fonts:
+      - family: Unna
+        fonts:
+          - asset: assets/Unna-Regular.ttf
+          - asset: assets/Unna-Italic.ttf
+            style: italic
+      - family: Titillium Web
+        fonts:
+          - asset: assets/TitilliumWeb-SemiBold.ttf
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
