@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:state_management/getx/login_screen_get.dart';
 import 'package:state_management/getx/pages.dart';
 import 'package:state_management/getx/theme_controller.dart';
 
