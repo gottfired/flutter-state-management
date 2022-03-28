@@ -9,7 +9,6 @@ import '../helper.dart';
 class LoginScreenGet extends GetView<LoginController> {
   @override
   Widget build(context) {
-    final node = FocusScope.of(context);
     final themeRepo = ThemeRepo.instance;
 
     return Scaffold(
@@ -20,8 +19,7 @@ class LoginScreenGet extends GetView<LoginController> {
             Text('Login'),
             IconButton(
               onPressed: () => themeRepo.toggleTheme(),
-              icon: Obx(() => Icon(
-                  themeRepo.isDark.value ? Icons.light_mode : Icons.dark_mode)),
+              icon: Obx(() => Icon(themeRepo.isDark.value ? Icons.light_mode : Icons.dark_mode)),
             ),
           ],
         ),
@@ -47,18 +45,13 @@ class LoginScreenGet extends GetView<LoginController> {
                 initialValue: controller.email,
                 onChanged: controller.onEmailChanged,
                 keyboardType: TextInputType.emailAddress,
-                textInputAction: TextInputAction.next,
-                onEditingComplete: node.nextFocus,
-                autocorrect: false,
               ).paddingSymmetric(horizontal: 8.0),
               SizedBox(height: 20),
               Obx(
                 () => TextFormField(
                   decoration: InputDecoration(
                     labelText: 'Password',
-                    suffixIcon: VisibilityIcon(
-                        visible: controller.visiblePassword.value,
-                        toggleVisibility: controller.toggleVisibility),
+                    suffixIcon: VisibilityIcon(visible: controller.visiblePassword.value, toggleVisibility: controller.toggleVisibility),
                   ),
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: validatePassword,
@@ -83,31 +76,3 @@ class LoginScreenGet extends GetView<LoginController> {
     );
   }
 }
-
-// LoginScreen(
-//   toggleDarkmodeButton: IconButton(
-//     onPressed: () => themeRepo.toggleTheme(),
-//     icon: Obx(() =>
-//         Icon(themeRepo.isDark.value ? Icons.light_mode : Icons.dark_mode)),
-//   ),
-//   email: controller.email,
-//   onEmailChanged: controller.onEmailChanged,
-//   onLogin: (_) => controller.onLogin(),
-//   passwordInputField: Obx(
-//     () => TextFormField(
-//       decoration: InputDecoration(
-//         labelText: 'Password',
-//         suffixIcon: VisibilityIcon(
-//             visible: controller.visiblePassword.value,
-//             toggleVisibility: controller.toggleVisibility),
-//       ),
-//       autovalidateMode: AutovalidateMode.onUserInteraction,
-//       validator: validatePassword,
-//       initialValue: controller.password,
-//       obscureText: !controller.visiblePassword.value,
-//       obscuringCharacter: '●',
-//       textInputAction: TextInputAction.done,
-//       onFieldSubmitted: (_) => controller.onLogin(),
-//     ),
-//   ),
-// );

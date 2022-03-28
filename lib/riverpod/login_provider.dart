@@ -48,10 +48,10 @@ class LoginNotifier extends StateNotifier<LoginState> {
 
   void onLogin(BuildContext context) async {
     try {
-      ref.watch(loadingProvider).setLoading(true);
+      ref.read(loadingProvider).setLoading(true); //watch not working
       await mockLogin(email: state.email, password: state.password);
-      ref.watch(loadingProvider).setLoading(false);
       Navigator.pushNamed(context, '/video');
+      ref.watch(loadingProvider).setLoading(false);
     } catch (e) {}
   }
 }
