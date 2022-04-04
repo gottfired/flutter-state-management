@@ -1,11 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:state_management/getx/pages.dart';
-import 'package:state_management/getx/theme_controller.dart';
+import 'package:state_management/getx/repos/auth_repo.dart';
+import 'getx/repos/theme_repo.dart';
 
 void main() {
-  Get.put(ThemeRepo());
+  Get.put(ThemeRepo(), permanent: true);
+  Get.put(AuthRepo(), permanent: true);
   runApp(App());
 }
 
