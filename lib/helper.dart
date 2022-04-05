@@ -34,7 +34,18 @@ Future mockLogin({required String? email, required String? password}) async {
   });
 }
 
+Future<UserInfo> login({required String email, required String password}) async {
+  await Future.delayed(const Duration(seconds: 1));
+  return UserInfo(email: email, loginTime: DateTime.now());
+}
+
 //format datetime to dd/MM/yyyy hh:mm:ss
 String formatDateTime(DateTime dateTime) {
   return '${dateTime.day}/${dateTime.month}/${dateTime.year} ${dateTime.hour}:${dateTime.minute}:${dateTime.second}';
+}
+
+class UserInfo {
+  String email;
+  DateTime loginTime;
+  UserInfo({required this.email, required this.loginTime});
 }
