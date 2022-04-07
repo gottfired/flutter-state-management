@@ -8,7 +8,8 @@ part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  AuthBloc() : super(AuthInitial()) {
+  static final AuthBloc _instance = AuthBloc._();
+  AuthBloc._() : super(AuthInitial()) {
     on<AuthEvent>((event, emit) async {
       if (event is Login) {
         emit(AuthLoading());
@@ -20,7 +21,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         } else {
           emit(AuthInvalidInput());
         }
+      } else if (event is Logout) {
+        emit(AuthInitial());
       }
     });
   }
+  static AuthBloc getInstance() => _instance;
 }

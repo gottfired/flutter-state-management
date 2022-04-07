@@ -4,7 +4,7 @@ import 'package:state_management/getx/repos/auth_repo.dart';
 import 'package:state_management/helper.dart';
 
 class LoginController extends GetxController {
-  AuthRepo _auth = AuthRepo.instance;
+  final AuthRepo _auth = AuthRepo.instance;
   String? email;
   String? password;
 
@@ -30,7 +30,7 @@ class LoginController extends GetxController {
 
   void _handleLogin() async {
     isLoading.value = true;
-    await _auth.login(email: email!, password: password!);
+    await _auth.onLogin(email: email!, password: password!);
     Get.toNamed(Routes.HOME);
     isLoading.value = false;
   }

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:state_management/helper.dart';
 
-import '../../../repos/auth_repo.dart';
-import '../../../repos/theme_repo.dart';
+import '../../repos/auth_repo.dart';
+import '../../repos/theme_repo.dart';
 
 class InfoPage extends StatelessWidget {
   final _auth = AuthRepo.instance;

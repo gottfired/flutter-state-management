@@ -44,6 +44,10 @@ String formatDateTime(DateTime dateTime) {
   return '${dateTime.day}/${dateTime.month}/${dateTime.year} ${dateTime.hour}:${dateTime.minute}:${dateTime.second}';
 }
 
+bool isDarkMode(BuildContext context) {
+  return Theme.of(context).brightness == Brightness.dark;
+}
+
 class UserInfo {
   String email;
   DateTime loginTime;

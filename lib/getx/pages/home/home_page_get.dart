@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:state_management/getx/pages/home/theme/theme_page.dart';
+import 'package:state_management/getx/pages/home/theme_page.dart';
 import '../../../components/theme_button.dart';
 import '../../repos/theme_repo.dart';
 import 'home_controller.dart';
-import 'info/info_page.dart';
+import 'info_page.dart';
 
-class HomePage extends GetView<HomeController> {
+class HomePageGet extends GetView<HomeController> {
   Widget getPage() {
     switch (controller.currentPage.value) {
       case 0:
