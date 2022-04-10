@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:state_management/getx/pages/home/theme_page.dart';
+import 'package:state_management/getx/pages/home/theme_page_get.dart';
 import '../../../components/theme_button.dart';
 import '../../repos/theme_repo.dart';
 import 'home_controller.dart';
-import 'info_page.dart';
+import 'info_page_get.dart';
 
 class HomePageGet extends GetView<HomeController> {
   Widget getPage() {
     switch (controller.currentPage.value) {
       case 0:
-        return InfoPage();
+        return InfoPageGet();
       case 1:
-        return ThemePage();
+        return ThemePageGet();
       default:
-        return Container();
+        return InfoPageGet();
     }
   }
 
@@ -23,7 +23,7 @@ class HomePageGet extends GetView<HomeController> {
     final _theme = ThemeRepo.instance;
     return Scaffold(
         appBar: AppBar(
-          title: Text('Home'),
+          title: const Text('Home'),
           actions: [
             Obx(
               () => ThemeButton(isDark: _theme.isDark.value, onPressed: _theme.toggleTheme),

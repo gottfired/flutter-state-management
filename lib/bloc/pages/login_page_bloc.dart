@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:state_management/bloc/business%20logic/cubit/password_cubit.dart';
 import 'package:state_management/components/email_text_field.dart';
 import 'package:state_management/components/loading_button.dart';
 import 'package:state_management/components/password_text_field.dart';
 import 'package:state_management/components/theme_button.dart';
 import '../business logic/bloc/auth/auth_bloc.dart';
-import '../business logic/bloc/theme/cubit/theme_cubit.dart';
+import '../business logic/cubit/password/password_cubit.dart';
+import '../business logic/cubit/theme/theme_cubit.dart';
 
 class LoginPageBloc extends StatefulWidget {
   @override
@@ -23,6 +23,7 @@ class _LoginPageBlocState extends State<LoginPageBloc> {
   }
 
   final _passwordCubit = PasswordCubit();
+  final _authBloc = AuthBloc.getInstance();
 
   @override
   Widget build(context) {
@@ -58,7 +59,7 @@ class _LoginPageBlocState extends State<LoginPageBloc> {
                     initialValue: _email,
                     onChanged: (value) {
                       _email = value;
-                      context.read<AuthBloc>().add(ChangeInput(email: _email, password: _password));
+                      _authBloc.add(ChangeInput(email: _email, password: _password));
                     }),
                 const SizedBox(height: 20),
                 BlocBuilder<PasswordCubit, PasswordState>(
@@ -68,7 +69,7 @@ class _LoginPageBlocState extends State<LoginPageBloc> {
                       initialValue: _password,
                       onChanged: (value) {
                         _password = value;
-                        context.read<AuthBloc>().add(ChangeInput(email: _email, password: _password));
+                        _authBloc.add(ChangeInput(email: _email, password: _password));
                       },
                       visible: state is PasswordVisible,
                       toggleVisibility: () => _passwordCubit.toggle(),
@@ -82,7 +83,7 @@ class _LoginPageBlocState extends State<LoginPageBloc> {
                   isLoading: state is AuthLoading,
                   onPressed: state is AuthValidInput
                       ? () {
-                          context.read<AuthBloc>().add(Login(email: _email, password: _password));
+                          _authBloc.add(Login(email: _email, password: _password));
                         }
                       : null,
                 ),

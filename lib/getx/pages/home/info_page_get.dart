@@ -5,7 +5,7 @@ import 'package:state_management/helper.dart';
 import '../../repos/auth_repo.dart';
 import '../../repos/theme_repo.dart';
 
-class InfoPage extends StatelessWidget {
+class InfoPageGet extends StatelessWidget {
   final _auth = AuthRepo.instance;
   @override
   Widget build(BuildContext context) {
