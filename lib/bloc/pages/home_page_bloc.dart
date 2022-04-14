@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:state_management/bloc/pages/info_page_bloc.dart';
 import 'package:state_management/bloc/pages/theme_page_bloc.dart';
-import '../../components/theme_button.dart';
+import '../../shared/components/theme_button.dart';
 import '../business logic/cubit/home/home_cubit.dart';
 import '../business logic/cubit/theme/theme_cubit.dart';
-
-//final homeCubit = HomeCubit();
 
 class HomePageBloc extends StatelessWidget {
   Widget getPage(int index) {

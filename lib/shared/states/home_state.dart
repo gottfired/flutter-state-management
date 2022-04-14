@@ -1,4 +1,4 @@
-part of 'home_cubit.dart';
+part of '../../bloc/business logic/cubit/home/home_cubit.dart';
 
 @immutable
 abstract class HomeState {

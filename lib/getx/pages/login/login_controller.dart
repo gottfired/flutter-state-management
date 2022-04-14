@@ -1,7 +1,8 @@
 import 'package:get/get.dart';
-import 'package:state_management/getx/pages.dart';
 import 'package:state_management/getx/repos/auth_repo.dart';
-import 'package:state_management/helper.dart';
+import 'package:state_management/shared/helper.dart';
+
+import '../../../shared/routes.dart';
 
 class LoginController extends GetxController {
   final AuthRepo _auth = AuthRepo.instance;

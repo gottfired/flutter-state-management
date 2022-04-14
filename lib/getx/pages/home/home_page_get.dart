@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:state_management/getx/pages/home/theme_page_get.dart';
-import '../../../components/theme_button.dart';
+import '../../../shared/components/theme_button.dart';
 import '../../repos/theme_repo.dart';
 import 'home_controller.dart';
 import 'info_page_get.dart';

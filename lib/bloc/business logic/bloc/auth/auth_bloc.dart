@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:state_management/helper.dart';
+import 'package:state_management/shared/helper.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:state_management/components/email_text_field.dart';
-import 'package:state_management/components/loading_button.dart';
-import 'package:state_management/components/password_text_field.dart';
-import 'package:state_management/components/theme_button.dart';
+import 'package:state_management/shared/components/email_text_field.dart';
+import 'package:state_management/shared/components/loading_button.dart';
+import 'package:state_management/shared/components/password_text_field.dart';
+import 'package:state_management/shared/components/theme_button.dart';
+import 'package:state_management/shared/routes.dart';
 import '../business logic/bloc/auth/auth_bloc.dart';
 import '../business logic/cubit/password/password_cubit.dart';
 import '../business logic/cubit/theme/theme_cubit.dart';
@@ -40,7 +41,7 @@ class _LoginPageBlocState extends State<LoginPageBloc> {
       ),
       body: BlocConsumer<AuthBloc, AuthState>(listener: ((context, state) {
         if (state is AuthSuccess) {
-          Navigator.of(context).pushReplacementNamed('/home');
+          Navigator.of(context).pushReplacementNamed(Routes.HOME);
         }
       }), builder: (context, state) {
         return SafeArea(

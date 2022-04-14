@@ -1,4 +1,4 @@
-part of 'theme_cubit.dart';
+part of '../../bloc/business logic/cubit/theme/theme_cubit.dart';
 
 @immutable
 abstract class ThemeState {

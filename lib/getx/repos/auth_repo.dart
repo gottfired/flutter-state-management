@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 
-import '../../helper.dart';
+import '../../shared/helper.dart';
+import '../../shared/routes.dart';
 import '../pages.dart';
 
 class AuthRepo extends GetxController {

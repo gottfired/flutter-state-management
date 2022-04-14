@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 import 'package:state_management/getx/pages.dart';
 import 'package:state_management/getx/repos/auth_repo.dart';
-import 'package:state_management/helper.dart';
+import 'package:state_management/shared/helper.dart';
+import 'package:state_management/shared/routes.dart';
 import 'getx/repos/theme_repo.dart';
 
 void main() {

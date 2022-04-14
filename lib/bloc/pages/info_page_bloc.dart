@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../helper.dart';
+import '../../shared/helper.dart';
+import '../../shared/routes.dart';
 import '../business logic/bloc/auth/auth_bloc.dart';
-import '../pages.dart';
 
 class InfoPageBloc extends StatelessWidget {
   @override
