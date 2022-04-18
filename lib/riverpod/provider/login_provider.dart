@@ -5,6 +5,8 @@ import 'package:riverpod/riverpod.dart';
 import 'package:state_management/shared/helper.dart';
 import 'package:state_management/riverpod/provider/auth_provider.dart';
 
+import '../../shared/routes.dart';
+
 @immutable
 abstract class LoginState {}
 
@@ -32,10 +34,11 @@ class LoginNotifier extends StateNotifier<LoginState> {
     }
   }
 
-  void handleLogin() async {
+  Future<void> handleLogin(BuildContext context) async {
     state = Loading();
     await ref.read(authProvider.notifier).handleLogin(email: ref.read(emailProvider), password: ref.read(emailProvider));
     state = Initial();
+    Navigator.of(context).pushReplacementNamed(Routes.HOME);
   }
 
   void toggleVisibility() {

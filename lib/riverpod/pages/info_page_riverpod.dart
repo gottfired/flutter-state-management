@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_management/riverpod/provider/auth_provider.dart';
 import 'package:state_management/shared/helper.dart';
-import 'package:state_management/shared/routes.dart';
 
 class InfoPageRiverpod extends ConsumerWidget {
   @override
@@ -27,7 +26,6 @@ class InfoPageRiverpod extends ConsumerWidget {
         ),
       );
     } else {
-      Navigator.of(context).pushReplacementNamed(Routes.LOGIN);
       return const CircularProgressIndicator();
     }
   }

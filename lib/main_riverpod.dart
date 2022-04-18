@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_management/riverpod/pages.dart';
-import 'package:state_management/shared/helper.dart';
-import 'package:state_management/riverpod/login_screen_riverpod.dart';
 import 'package:state_management/riverpod/provider/theme_provider.dart';
 import 'package:state_management/shared/routes.dart';
 

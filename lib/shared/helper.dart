@@ -19,7 +19,6 @@ bool validateEmail(String? value) {
 }
 
 bool validatePassword(String? value) {
-  print(value != null && value.isNotEmpty);
   if (value != null && value.isNotEmpty) return true;
   return false;
 }

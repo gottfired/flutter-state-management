@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_management/riverpod/provider/auth_provider.dart';
 import 'package:state_management/riverpod/provider/theme_provider.dart';
+import 'package:state_management/shared/pages/loading_page.dart';
 import 'package:state_management/shared/routes.dart';
-import '../shared/components/email_text_field.dart';
-import '../shared/components/loading_button.dart';
-import '../shared/components/password_text_field.dart';
-import '../shared/components/theme_button.dart';
-import 'provider/login_provider.dart';
+import '../../shared/components/email_text_field.dart';
+import '../../shared/components/loading_button.dart';
+import '../../shared/components/password_text_field.dart';
+import '../../shared/components/theme_button.dart';
+import '../provider/login_provider.dart';
 
 class LoginPageRiverpod extends ConsumerWidget {
   @override
@@ -21,7 +22,6 @@ class LoginPageRiverpod extends ConsumerWidget {
     final password = ref.watch(passwordProvider);
     final passwordVisible = ref.watch(passwordVisibilityProvider);
     final authState = ref.watch(authProvider);
-
     if (authState is LoggedOut) {
       return Scaffold(
         appBar: AppBar(
@@ -55,7 +55,7 @@ class LoginPageRiverpod extends ConsumerWidget {
                 ),
                 LoadingButton(
                   isLoading: loginState is Loading,
-                  onPressed: loginState is ValidInput ? loginNotifier.handleLogin : null,
+                  onPressed: loginState is ValidInput ? () => loginNotifier.handleLogin(context) : null,
                 ),
               ],
             ),
@@ -63,8 +63,7 @@ class LoginPageRiverpod extends ConsumerWidget {
         ),
       );
     } else {
-      Navigator.of(context).pushReplacementNamed(Routes.HOME);
-      return CircularProgressIndicator();
+      return const LoadingPage();
     }
   }
 }
