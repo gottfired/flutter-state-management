@@ -4,6 +4,7 @@ import 'package:state_management/riverpod/provider/home_provider.dart';
 import 'package:state_management/riverpod/provider/theme_provider.dart';
 import 'package:state_management/riverpod/pages/theme_page_riverpod.dart';
 import '../../../shared/components/theme_button.dart';
+import '../../shared/states/theme_state.dart';
 import 'info_page_riverpod.dart';
 
 class HomePageRiverpod extends ConsumerWidget {

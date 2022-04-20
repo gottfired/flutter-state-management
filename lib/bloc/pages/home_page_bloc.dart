@@ -4,8 +4,9 @@ import 'package:state_management/bloc/pages/info_page_bloc.dart';
 import 'package:state_management/bloc/pages/theme_page_bloc.dart';
 import '../../shared/components/theme_button.dart';
 import '../../shared/states/home_state.dart';
+import '../../shared/states/theme_state.dart';
 import '../business logic/cubit/home_cubit.dart';
-import '../business logic/cubit/theme/theme_cubit.dart';
+import '../business logic/cubit/theme_cubit.dart';
 
 class HomePageBloc extends StatelessWidget {
   Widget getPage(int index) {

@@ -9,83 +9,85 @@ import 'package:state_management/shared/components/theme_button.dart';
 import 'package:state_management/shared/routes.dart';
 import '../../shared/states/auth_state.dart';
 import '../../shared/states/login_states.dart';
-import '../business logic/cubit/password/password_cubit.dart';
-import '../business logic/cubit/theme/theme_cubit.dart';
-
+import '../../shared/states/theme_state.dart';
+import '../business logic/cubit/theme_cubit.dart';
 
 class LoginPageBloc extends StatelessWidget {
-
   @override
   Widget build(context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login Bloc'),
-        actions: [
-          BlocBuilder<ThemeCubit, ThemeState>(
+    return BlocProvider(
+      create: (context) => LoginCubit(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Login Bloc'),
+          actions: [
+            BlocBuilder<ThemeCubit, ThemeState>(
+              builder: (context, state) {
+                return ThemeButton(isDark: state is DarkTheme, onPressed: context.read<ThemeCubit>().toggle);
+              },
+            ),
+          ],
+        ),
+        body: BlocListener<AuthCubit, AuthState>(
+          listener: ((context, state) {
+            if (state is LoggedIn) {
+              Navigator.of(context).pushReplacementNamed(Routes.HOME);
+            }
+          }),
+          child: BlocBuilder<LoginCubit, LoginState>(
             builder: (context, state) {
-              return ThemeButton(isDark: state is DarkTheme, onPressed: context.read<ThemeCubit>().toggle);
+              final loginCubit = context.read<LoginCubit>();
+              final emailCubit = loginCubit.emailCubit;
+              final passwordCubit = loginCubit.passwordCubit;
+              final passwordVisibilityCubit = loginCubit.passwordVisibilityCubit;
+
+              return SafeArea(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      EmailTextField(
+                        initialValue: emailCubit.state,
+                        onChanged: (value) => loginCubit.handleInputChanged(email: value),
+                      ),
+                      const SizedBox(height: 20),
+                      BlocBuilder<PasswordVisibilityCubit, bool>(
+                        bloc: passwordVisibilityCubit,
+                        builder: (context, state) {
+                          return PasswordTextField(
+                            initialValue: passwordCubit.state,
+                            onChanged: (value) => loginCubit.handleInputChanged(password: value),
+                            visible: state,
+                            toggleVisibility: loginCubit.toggleVisibility,
+                          );
+                        },
+                      ),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      LoadingButton(
+                        isLoading: state is Loading,
+                        onPressed: state is ValidInput
+                            ? () async {
+                                await loginCubit.handleLogin(context);
+                              }
+                            : null,
+                      ),
+                    ],
+                  ),
+                ),
+              );
             },
           ),
-        ],
+        ),
       ),
-      body: BlocListener<AuthCubit, AuthState>(listener: ((context, state) {
-        if (state is LoggedIn) {
-          Navigator.of(context).pushReplacementNamed(Routes.HOME);
-        }
-      }), child: 
-         BlocBuilder<LoginCubit, LoginState>(
-           builder: (context, state) {
-             return SafeArea(
-                   child: SingleChildScrollView(
-                     padding: const EdgeInsets.symmetric(horizontal: 20),
-                     child: Column(
-                       crossAxisAlignment: CrossAxisAlignment.stretch,
-                       children: [
-                         const SizedBox(
-                           height: 20,
-                         ),
-                         const SizedBox(
-                           height: 20,
-                         ),
-                         EmailTextField(
-                             initialValue: ,
-                             onChanged: (value) {
-                               _email = value;
-                               _authBloc.add(ChangeInput(email: _email, password: _password));
-                             }),
-                         const SizedBox(height: 20),
-                         BlocBuilder<PasswordCubit, PasswordState>(
-                           bloc: _passwordCubit,
-                           builder: (context, state) {
-                             return PasswordTextField(
-                               initialValue: _password,
-                               onChanged: (value) {
-                                 _password = value;
-                                 _authBloc.add(ChangeInput(email: _email, password: _password));
-                               },
-                               visible: state is PasswordVisible,
-                               toggleVisibility: () => _passwordCubit.toggle(),
-                             );
-                           },
-                         ),
-                         const SizedBox(
-                           height: 40,
-                         ),
-                         LoadingButton(
-                           isLoading: state is AuthLoading,
-                           onPressed: state is AuthValidInput
-                               ? () {
-                                   _authBloc.add(Login(email: _email, password: _password));
-                                 }
-                               : null,
-                         ),
-                       ],
-                     ),
-                   ),
-                 );
-           },
-         );
-      }),
     );
   }
 }

@@ -1,19 +1,19 @@
 import 'package:get/get.dart';
-
+import 'package:state_management/shared/states/auth_state.dart';
 import '../../shared/helper.dart';
 import '../../shared/routes.dart';
-import '../pages.dart';
 
 class AuthRepo extends GetxController {
   static AuthRepo instance = Get.find();
-  UserInfo? userInfo;
 
-  Future<void> onLogin({required String email, required String password}) async {
-    userInfo = await login(email: email, password: password);
-    Get.offNamed(Routes.HOME);
+  final authState = Rx<AuthState>(LoggedOut());
+
+  Future<void> handleLogin({required String email, required String password}) async {
+    final userInfo = await login(email: email, password: password);
+    authState.value = LoggedIn(userInfo);
   }
 
-  void logout() {
-    Get.offNamed(Routes.LOGIN);
+  void handleLogout() {
+    authState.value = LoggedOut();
   }
 }

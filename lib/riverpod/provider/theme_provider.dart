@@ -1,22 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-@immutable
-abstract class ThemeState {
-  late final ThemeMode theme;
-}
-
-class DarkTheme extends ThemeState {
-  DarkTheme() {
-    theme = ThemeMode.dark;
-  }
-}
-
-class LightTheme extends ThemeState {
-  LightTheme() {
-    theme = ThemeMode.light;
-  }
-}
+import '../../shared/states/theme_state.dart';
 
 class ThemeNotifier extends StateNotifier<ThemeState> {
   ThemeNotifier(ThemeState state) : super(state);

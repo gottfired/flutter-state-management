@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:state_management/getx/pages/home/theme_page_get.dart';
 import '../../../shared/components/theme_button.dart';
+import '../../../shared/states/theme_state.dart';
 import '../../repos/theme_repo.dart';
 import 'home_controller.dart';
 import 'info_page_get.dart';
 
 class HomePageGet extends GetView<HomeController> {
   Widget getPage() {
-    switch (controller.currentPage.value) {
+    switch (controller.homeState.value.index) {
       case 0:
         return InfoPageGet();
       case 1:
@@ -20,20 +21,20 @@ class HomePageGet extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    final _theme = ThemeRepo.instance;
+    final _themeRepo = ThemeRepo.instance;
     return Scaffold(
         appBar: AppBar(
           title: const Text('Home'),
           actions: [
             Obx(
-              () => ThemeButton(isDark: _theme.isDark.value, onPressed: _theme.toggleTheme),
+              () => ThemeButton(isDark: _themeRepo.theme.value is DarkTheme, onPressed: _themeRepo.toggleTheme),
             ),
           ],
         ),
         body: Obx(() => getPage()),
         bottomNavigationBar: Obx(
           () => BottomNavigationBar(
-            currentIndex: controller.currentPage.value,
+            currentIndex: controller.homeState.value.index,
             items: const [
               BottomNavigationBarItem(
                 icon: Icon(Icons.info),

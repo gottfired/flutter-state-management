@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:state_management/getx/repos/auth_repo.dart';
 import 'package:state_management/shared/helper.dart';
+import 'package:state_management/shared/states/login_states.dart';
 
 import '../../../shared/routes.dart';
 
@@ -9,9 +10,9 @@ class LoginController extends GetxController {
   String? email;
   String? password;
 
+  final loginState = Rx<LoginState>(LoginInitial());
+
   final visiblePassword = false.obs;
-  final validInput = false.obs;
-  final isLoading = false.obs;
 
   toggleVisibility() => visiblePassword.toggle();
 
@@ -26,18 +27,22 @@ class LoginController extends GetxController {
   }
 
   void validateInput() {
-    validInput.value = validateEmail(email) && validatePassword(password);
+    if (validateEmail(email) && validatePassword(password)) {
+      loginState.value = ValidInput();
+    } else {
+      loginState.value = InvalidInput();
+    }
   }
 
   void _handleLogin() async {
-    isLoading.value = true;
-    await _auth.onLogin(email: email!, password: password!);
-    Get.toNamed(Routes.HOME);
-    isLoading.value = false;
+    loginState.value = Loading();
+    await _auth.handleLogin(email: email!, password: password!);
+    loginState.value = LoginInitial();
+    Get.offNamed(Routes.HOME);
   }
 
   void Function()? getHandleLogin() {
-    if (validInput.value) {
+    if (loginState.value is ValidInput) {
       return _handleLogin;
     }
     return null;

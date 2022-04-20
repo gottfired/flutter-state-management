@@ -1,4 +1,4 @@
-part of '../../bloc/business logic/cubit/theme/theme_cubit.dart';
+import 'package:flutter/material.dart';
 
 @immutable
 abstract class ThemeState {

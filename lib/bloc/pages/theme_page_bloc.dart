@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../business logic/cubit/theme/theme_cubit.dart';
+import '../../shared/states/theme_state.dart';
+import '../business logic/cubit/theme_cubit.dart';
 
 class ThemePageBloc extends StatelessWidget {
   @override

@@ -5,19 +5,21 @@ import 'package:state_management/shared/components/loading_button.dart';
 import 'package:state_management/shared/components/password_text_field.dart';
 import 'package:state_management/shared/components/theme_button.dart';
 import 'package:state_management/getx/pages/login/login_controller.dart';
+import 'package:state_management/shared/states/login_states.dart';
+import '../../../shared/states/theme_state.dart';
 import '../../repos/theme_repo.dart';
 
 class LoginPageGet extends GetView<LoginController> {
   @override
   Widget build(context) {
-    final _theme = ThemeRepo.instance;
+    final _themeRepo = ThemeRepo.instance;
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login'),
         actions: [
           Obx(
-            () => ThemeButton(isDark: _theme.isDark.value, onPressed: _theme.toggleTheme),
+            () => ThemeButton(isDark: _themeRepo.theme.value is DarkTheme, onPressed: _themeRepo.toggleTheme),
           ),
         ],
       ),
@@ -47,7 +49,7 @@ class LoginPageGet extends GetView<LoginController> {
               ),
               Obx(
                 () => LoadingButton(
-                  isLoading: controller.isLoading.value,
+                  isLoading: controller.loginState.value is Loading,
                   onPressed: controller.getHandleLogin(),
                 ),
               ),
