@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_management/riverpod/provider/home_provider.dart';
 import 'package:state_management/riverpod/provider/theme_provider.dart';
-import 'package:state_management/riverpod/theme_page_riverpod.dart';
+import 'package:state_management/riverpod/pages/theme_page_riverpod.dart';
 import '../../../shared/components/theme_button.dart';
 import 'info_page_riverpod.dart';
 
@@ -44,7 +44,7 @@ class HomePageRiverpod extends ConsumerWidget {
             label: 'Theme',
           ),
         ],
-        onTap: (index) => homeNotifier.changePage(index),
+        onTap: homeNotifier.changePage,
       ),
     );
   }

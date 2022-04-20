@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:state_management/bloc/business%20logic/cubit/home/home_cubit.dart';
+import 'package:state_management/shared/states/home_state.dart';
 
 class HomeNotifier extends StateNotifier<HomeState> {
   HomeNotifier(HomeState state) : super(state);

@@ -3,11 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_management/riverpod/provider/auth_provider.dart';
 import 'package:state_management/riverpod/provider/theme_provider.dart';
 import 'package:state_management/shared/pages/loading_page.dart';
-import 'package:state_management/shared/routes.dart';
 import '../../shared/components/email_text_field.dart';
 import '../../shared/components/loading_button.dart';
 import '../../shared/components/password_text_field.dart';
 import '../../shared/components/theme_button.dart';
+import '../../shared/states/auth_state.dart';
+import '../../shared/states/login_states.dart';
 import '../provider/login_provider.dart';
 
 class LoginPageRiverpod extends ConsumerWidget {
@@ -18,9 +19,9 @@ class LoginPageRiverpod extends ConsumerWidget {
     final loginNotifier = ref.watch(loginProvider.notifier);
     final loginState = ref.watch(loginProvider);
 
-    final email = ref.watch(emailProvider);
-    final password = ref.watch(passwordProvider);
-    final passwordVisible = ref.watch(passwordVisibilityProvider);
+    final email = ref.watch(loginNotifier.emailProvider);
+    final password = ref.watch(loginNotifier.passwordProvider);
+    final passwordVisible = ref.watch(loginNotifier.passwordVisibilityProvider);
     final authState = ref.watch(authProvider);
     if (authState is LoggedOut) {
       return Scaffold(

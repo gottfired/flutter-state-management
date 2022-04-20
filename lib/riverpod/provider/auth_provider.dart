@@ -1,26 +1,22 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_management/shared/helper.dart';
 
-abstract class AuthState {}
-
-class LoggedIn extends AuthState {
-  final UserInfo userInfo;
-
-  LoggedIn(this.userInfo);
-}
-
-class LoggedOut extends AuthState {}
+import '../../shared/routes.dart';
+import '../../shared/states/auth_state.dart';
 
 class AuthNotifier extends StateNotifier<AuthState> {
   AuthNotifier() : super(LoggedOut());
 
-  Future handleLogin({required String email, required String password}) async {
+  Future handleLogin(BuildContext context, {required String email, required String password}) async {
     final userInfo = await login(email: email, password: password);
     state = LoggedIn(userInfo);
+    Navigator.of(context).pushReplacementNamed(Routes.HOME);
   }
 
-  void handleLogout() {
+  void handleLogout(BuildContext context) {
     state = LoggedOut();
+    Navigator.of(context).pushReplacementNamed(Routes.LOGIN);
   }
 }
 

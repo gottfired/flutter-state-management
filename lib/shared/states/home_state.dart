@@ -1,6 +1,3 @@
-part of '../../bloc/business logic/cubit/home/home_cubit.dart';
-
-@immutable
 abstract class HomeState {
   late final int index;
 }

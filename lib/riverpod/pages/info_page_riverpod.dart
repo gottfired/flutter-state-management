@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_management/riverpod/provider/auth_provider.dart';
 import 'package:state_management/shared/helper.dart';
+import 'package:state_management/shared/pages/loading_page.dart';
+import 'package:state_management/shared/states/auth_state.dart';
 
 class InfoPageRiverpod extends ConsumerWidget {
   @override
@@ -19,14 +21,14 @@ class InfoPageRiverpod extends ConsumerWidget {
             Text(formatDateTime(authState.userInfo.loginTime), style: Theme.of(context).textTheme.headline6),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: authNotifier.handleLogout,
+              onPressed: () => authNotifier.handleLogout(context),
               child: const Text('Logout'),
             ),
           ],
         ),
       );
     } else {
-      return const CircularProgressIndicator();
+      return const LoadingPage();
     }
   }
 }

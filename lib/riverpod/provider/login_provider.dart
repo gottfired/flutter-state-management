@@ -1,27 +1,16 @@
-import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:state_management/shared/helper.dart';
 import 'package:state_management/riverpod/provider/auth_provider.dart';
-
-import '../../shared/routes.dart';
-
-@immutable
-abstract class LoginState {}
-
-class Initial extends LoginState {}
-
-class InvalidInput extends LoginState {}
-
-class ValidInput extends LoginState {}
-
-class Loading extends LoginState {}
+import '../../shared/states/login_states.dart';
 
 class LoginNotifier extends StateNotifier<LoginState> {
-  LoginNotifier(this.ref) : super(Initial());
+  LoginNotifier(this.ref) : super(ValidInput());
 
   final Ref ref;
+  final emailProvider = StateProvider<String>((_) => "jan@mail.at");
+  final passwordProvider = StateProvider<String>((_) => "aaa");
+  final passwordVisibilityProvider = StateProvider<bool>((_) => false);
 
   void handleInputChanged({String? email, String? password}) {
     if (email != null) ref.read(emailProvider.notifier).state = email;
@@ -36,9 +25,7 @@ class LoginNotifier extends StateNotifier<LoginState> {
 
   Future<void> handleLogin(BuildContext context) async {
     state = Loading();
-    await ref.read(authProvider.notifier).handleLogin(email: ref.read(emailProvider), password: ref.read(emailProvider));
-    state = Initial();
-    Navigator.of(context).pushReplacementNamed(Routes.HOME);
+    await ref.read(authProvider.notifier).handleLogin(context, email: ref.read(emailProvider), password: ref.read(emailProvider));
   }
 
   void toggleVisibility() {
@@ -46,7 +33,7 @@ class LoginNotifier extends StateNotifier<LoginState> {
   }
 }
 
-final loginProvider = StateNotifierProvider<LoginNotifier, LoginState>((ref) => LoginNotifier(ref));
-final emailProvider = StateProvider<String>((_) => "");
-final passwordProvider = StateProvider<String>((_) => "");
-final passwordVisibilityProvider = StateProvider<bool>((_) => false);
+final loginProvider = StateNotifierProvider<LoginNotifier, LoginState>((ref) {
+  ref.watch(authProvider);
+  return LoginNotifier(ref);
+});

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:state_management/bloc/business%20logic/bloc/auth/auth_bloc.dart';
+import 'package:state_management/bloc/business%20logic/cubit/auth_cubit.dart';
 import 'package:state_management/shared/helper.dart';
 import 'bloc/business logic/cubit/theme/theme_cubit.dart';
 import 'bloc/pages.dart';
@@ -19,7 +20,7 @@ class App extends StatelessWidget {
           create: (context) => ThemeCubit(isDarkMode(context) ? DarkTheme() : LightTheme()),
         ),
         BlocProvider(
-          create: (context) => AuthBloc.getInstance(),
+          create: (context) => AuthCubit(),
         )
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(
