@@ -22,9 +22,9 @@ class InfoPageBloc extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(state.userInfo.email, style: Theme.of(context).textTheme.headline6),
+                Text(state.userInfo!.email, style: Theme.of(context).textTheme.headline6),
                 const SizedBox(height: 16),
-                Text(formatDateTime(state.userInfo.loginTime), style: Theme.of(context).textTheme.headline6),
+                Text(formatDateTime(state.userInfo!.loginTime), style: Theme.of(context).textTheme.headline6),
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () => context.read<AuthCubit>().handleLogout(),

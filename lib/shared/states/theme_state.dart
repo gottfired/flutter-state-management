@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-@immutable
 abstract class ThemeState {
   late final ThemeMode theme;
 }

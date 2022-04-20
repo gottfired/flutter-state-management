@@ -17,9 +17,9 @@ class InfoPageGet extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(authState.userInfo.email, style: Theme.of(context).textTheme.headline6),
+            Text(authState.userInfo!.email, style: Theme.of(context).textTheme.headline6),
             const SizedBox(height: 16),
-            Text(formatDateTime(authState.userInfo.loginTime), style: Theme.of(context).textTheme.headline6),
+            Text(formatDateTime(authState.userInfo!.loginTime), style: Theme.of(context).textTheme.headline6),
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {

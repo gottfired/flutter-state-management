@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:state_management/shared/states/auth_state.dart';
 
 bool validateEmail(String? value) {
   // Regex for email validation
@@ -45,10 +46,4 @@ String formatDateTime(DateTime dateTime) {
 
 bool isDarkMode(BuildContext context) {
   return Theme.of(context).brightness == Brightness.dark;
-}
-
-class UserInfo {
-  String email;
-  DateTime loginTime;
-  UserInfo({required this.email, required this.loginTime});
 }
